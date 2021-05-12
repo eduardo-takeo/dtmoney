@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import Modal from "react-modal";
 import { createServer } from "miragejs";
 import { Dashboard } from "./components/Dashboard";
 import { Header } from "./components/Header";
 
 import GlobalStyle from "./styles/global";
+import { NewTransactionModal } from "./components/NewTransactionModal";
 
 createServer({
   routes() {
@@ -17,11 +19,29 @@ createServer({
   },
 });
 
+Modal.setAppElement("#root");
+
 function App() {
+  const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] =
+    useState(false);
+
+  function openNewTransactionModal() {
+    setIsNewTransactionModalOpen(true);
+  }
+
+  function closeNewTransactionModal() {
+    setIsNewTransactionModalOpen(false);
+  }
+
   return (
     <>
       <GlobalStyle />
-      <Header />
+      <NewTransactionModal
+        isOpen={isNewTransactionModalOpen}
+        onRequestClose={closeNewTransactionModal}
+      />
+
+      <Header openModal={openNewTransactionModal} />
       <Dashboard />
     </>
   );

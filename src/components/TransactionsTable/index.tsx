@@ -9,6 +9,7 @@ export const TransactionsTable = () => {
 
   async function fetchTransactions() {
     const { data } = await api.get("/transactions");
+    console.log(`data`, data);
   }
 
   return (
