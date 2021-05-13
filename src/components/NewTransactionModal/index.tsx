@@ -4,6 +4,7 @@ import incomeImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
 import closeImg from "../../assets/close.svg";
 import { Container, TransactionTypeContainer, BoxRadio } from "./styles";
+import api from "../../services/api";
 
 interface NewTransactionModalProps {
   isOpen: boolean;
@@ -19,14 +20,21 @@ export const NewTransactionModal = ({
   const [category, setCategory] = useState("");
   const [type, setType] = useState("deposit");
 
-  function handleCreateNewTransaction(event: FormEvent) {
+  async function handleCreateNewTransaction(event: FormEvent) {
     event.preventDefault();
-    console.log({
+
+    const data = {
       title,
       price,
       category,
       type,
-    });
+    };
+
+    try {
+      await api.post("/transactions", data);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
