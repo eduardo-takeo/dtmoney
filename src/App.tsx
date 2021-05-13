@@ -11,6 +11,32 @@ createServer({
   models: {
     transaction: Model,
   },
+  seeds(server) {
+    server.create("transaction", {
+      id: "1",
+      title: "PC gamer",
+      type: "withdraw",
+      price: 5000,
+      category: "Compras",
+      createdAt: new Date().toLocaleDateString(),
+    });
+    server.create("transaction", {
+      id: "2",
+      title: "Salário",
+      type: "deposit",
+      price: 15000,
+      category: "Renda mensal",
+      createdAt: new Date().toLocaleDateString(),
+    });
+    server.create("transaction", {
+      id: "3",
+      title: "Curso",
+      type: "withdraw",
+      price: 250,
+      category: "Educação",
+      createdAt: new Date().toLocaleDateString(),
+    });
+  },
   routes() {
     this.namespace = "/api";
 
@@ -30,7 +56,7 @@ Modal.setAppElement("#root");
 
 function App() {
   const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] =
-    useState(true);
+    useState(false);
 
   function openNewTransactionModal() {
     setIsNewTransactionModalOpen(true);
