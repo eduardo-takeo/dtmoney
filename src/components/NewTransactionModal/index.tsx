@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import Modal from "react-modal";
 import incomeImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
@@ -14,7 +14,20 @@ export const NewTransactionModal = ({
   isOpen,
   onRequestClose,
 }: NewTransactionModalProps) => {
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState(0);
+  const [category, setCategory] = useState("");
   const [type, setType] = useState("deposit");
+
+  function handleCreateNewTransaction(event: FormEvent) {
+    event.preventDefault();
+    console.log({
+      title,
+      price,
+      category,
+      type,
+    });
+  }
 
   return (
     <Modal
@@ -30,10 +43,20 @@ export const NewTransactionModal = ({
       >
         <img src={closeImg} alt="Close modal" />
       </button>
-      <Container>
+      <Container onSubmit={handleCreateNewTransaction}>
         <h2>Cadastro de finanças</h2>
-        <input type="text" placeholder="Nome" />
-        <input type="text" placeholder="Preço" />
+        <input
+          type="text"
+          placeholder="Nome"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Preço"
+          value={price}
+          onChange={(e) => setPrice(Number(e.target.value))}
+        />
         <TransactionTypeContainer>
           <BoxRadio
             type="button"
@@ -54,7 +77,12 @@ export const NewTransactionModal = ({
             <span>Saída</span>
           </BoxRadio>
         </TransactionTypeContainer>
-        <input type="text" placeholder="Categoria" />
+        <input
+          type="text"
+          placeholder="Categoria"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        />
         <button type="submit">Cadastrar</button>
       </Container>
     </Modal>
