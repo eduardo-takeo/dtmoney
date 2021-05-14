@@ -6,6 +6,7 @@ import { Header } from "./components/Header";
 
 import GlobalStyle from "./styles/global";
 import { NewTransactionModal } from "./components/NewTransactionModal";
+import { TransactionsProvider } from "./contexts/TransactionsContext";
 
 createServer({
   models: {
@@ -67,7 +68,7 @@ function App() {
   }
 
   return (
-    <>
+    <TransactionsProvider>
       <GlobalStyle />
       <NewTransactionModal
         isOpen={isNewTransactionModalOpen}
@@ -76,7 +77,7 @@ function App() {
 
       <Header openModal={openNewTransactionModal} />
       <Dashboard />
-    </>
+    </TransactionsProvider>
   );
 }
 
