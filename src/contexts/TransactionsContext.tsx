@@ -15,6 +15,11 @@ type TransactionInput = Omit<Transaction, "id">;
 interface TransactionContextProviderProps {
   transactions: Transaction[];
   createTransaction: (transaction: TransactionInput) => void;
+  summary: {
+    deposits: number;
+    withdraws: number;
+    total: number;
+  };
 }
 
 interface TransactionsProviderProps {
@@ -50,8 +55,29 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
     }
   }
 
+  const summary = transactions.reduce(
+    (acc, transaction) => {
+      if (transaction.type === "deposit") {
+        acc.deposits += transaction.amount;
+        acc.total += transaction.amount;
+      } else {
+        acc.withdraws += transaction.amount;
+        acc.total -= transaction.amount;
+      }
+
+      return acc;
+    },
+    {
+      deposits: 0,
+      withdraws: 0,
+      total: 0,
+    }
+  );
+
   return (
-    <TransactionsContext.Provider value={{ transactions, createTransaction }}>
+    <TransactionsContext.Provider
+      value={{ transactions, createTransaction, summary }}
+    >
       {children}
     </TransactionsContext.Provider>
   );
