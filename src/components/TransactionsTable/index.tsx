@@ -19,14 +19,14 @@ export const TransactionsTable = () => {
 
         <tbody>
           {transactions?.map(
-            ({ id, title, price, type, category, createdAt }) => (
+            ({ id, title, amount, type, category, createdAt }) => (
               <tr key={id}>
                 <td>{title}</td>
                 <td className={type}>
                   {new Intl.NumberFormat("pt-BR", {
                     style: "currency",
                     currency: "BRL",
-                  }).format(price)}
+                  }).format(amount)}
                 </td>
                 <td>{category}</td>
                 <td>

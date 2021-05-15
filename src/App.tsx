@@ -17,7 +17,7 @@ createServer({
       id: "1",
       title: "PC gamer",
       type: "withdraw",
-      price: 5000,
+      amount: 5000,
       category: "Compras",
       createdAt: new Date().toLocaleDateString(),
     });
@@ -25,7 +25,7 @@ createServer({
       id: "2",
       title: "Salário",
       type: "deposit",
-      price: 15000,
+      amount: 15000,
       category: "Renda mensal",
       createdAt: new Date().toLocaleDateString(),
     });
@@ -33,7 +33,7 @@ createServer({
       id: "3",
       title: "Curso",
       type: "withdraw",
-      price: 250,
+      amount: 250,
       category: "Educação",
       createdAt: new Date().toLocaleDateString(),
     });

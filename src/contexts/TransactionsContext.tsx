@@ -4,7 +4,7 @@ import api from "../services/api";
 interface Transaction {
   id: string;
   title: string;
-  price: number;
+  amount: number;
   type: string;
   category: string;
   createdAt: Date;

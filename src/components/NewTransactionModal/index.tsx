@@ -16,7 +16,7 @@ export const NewTransactionModal = ({
   onRequestClose,
 }: NewTransactionModalProps) => {
   const [title, setTitle] = useState("");
-  const [price, setPrice] = useState(0);
+  const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("");
   const [type, setType] = useState("deposit");
 
@@ -25,7 +25,7 @@ export const NewTransactionModal = ({
 
     const data = {
       title,
-      price,
+      amount,
       category,
       type,
     };
@@ -62,8 +62,8 @@ export const NewTransactionModal = ({
         <input
           type="number"
           placeholder="Preço"
-          value={price}
-          onChange={(e) => setPrice(Number(e.target.value))}
+          value={amount}
+          onChange={(e) => setAmount(Number(e.target.value))}
         />
         <TransactionTypeContainer>
           <BoxRadio
